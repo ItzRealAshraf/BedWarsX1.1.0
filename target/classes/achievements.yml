@@ -1,0 +1,271 @@
+# ===========================================================================
+#  BedWarsX - achievements                         Author: ASHRAF ELHENAWY
+#  Every achievement gives XP (raises the BedWars level) + Coins when its goal is reached.
+#  Reload with /bw reload.  Open the menu with /bw achievements (or from the Stats menu).
+#
+#  stat (what is counted):
+#    wins, kills, finals, beds, games, deaths   - lifetime totals
+#    beststreak   - best win streak          level      - BedWars level
+#    voidkills    - players you knocked into the void
+#    flawless     - matches won without dying
+#    game-kills, game-finals, game-beds         - reached inside ONE match
+#  target: the number to reach   |   xp / coins: the rewards (0 = nothing)
+#  name-ar / desc-ar are used when language is ar in config.yml.
+#  Add your own by copying a block. enabled: false hides one.
+# ===========================================================================
+
+enabled: true
+check-on-join: true     # players unlock what they already earned (old stats) when they join
+title: true             # big "ACHIEVEMENT" title in the lobby (in a match it is chat + sound only)
+
+achievements:
+  first-win:
+    icon: GOLDEN_APPLE
+    stat: wins
+    target: 1
+    xp: 100
+    coins: 50
+    name: "First Victory"
+    desc: "Win your first BedWars match"
+    name-ar: "أول فوز"
+    desc-ar: "اكسب أول ماتش ليك في بيدوارز"
+  wins-10:
+    icon: GOLD_INGOT
+    stat: wins
+    target: 10
+    xp: 250
+    coins: 100
+    name: "Winner"
+    desc: "Win 10 matches"
+    name-ar: "الفايز"
+    desc-ar: "اكسب 10 ماتشات"
+  wins-50:
+    icon: DIAMOND
+    stat: wins
+    target: 50
+    xp: 600
+    coins: 300
+    name: "Champion"
+    desc: "Win 50 matches"
+    name-ar: "البطل"
+    desc-ar: "اكسب 50 ماتش"
+  wins-100:
+    icon: NETHER_STAR
+    stat: wins
+    target: 100
+    xp: 1200
+    coins: 600
+    name: "Legend"
+    desc: "Win 100 matches"
+    name-ar: "الأسطورة"
+    desc-ar: "اكسب 100 ماتش"
+  kills-10:
+    icon: IRON_SWORD
+    stat: kills
+    target: 10
+    xp: 100
+    coins: 40
+    name: "Fighter"
+    desc: "Kill 10 players"
+    name-ar: "المقاتل"
+    desc-ar: "اقتل 10 لاعبين"
+  kills-100:
+    icon: DIAMOND_SWORD
+    stat: kills
+    target: 100
+    xp: 500
+    coins: 200
+    name: "Slayer"
+    desc: "Kill 100 players"
+    name-ar: "القاتل"
+    desc-ar: "اقتل 100 لاعب"
+  kills-500:
+    icon: NETHERITE_SWORD
+    stat: kills
+    target: 500
+    xp: 1500
+    coins: 600
+    name: "Warlord"
+    desc: "Kill 500 players"
+    name-ar: "أمير الحرب"
+    desc-ar: "اقتل 500 لاعب"
+  finals-10:
+    icon: BOW
+    stat: finals
+    target: 10
+    xp: 200
+    coins: 100
+    name: "Finisher"
+    desc: "Get 10 final kills"
+    name-ar: "المنهي"
+    desc-ar: "اعمل 10 قتل نهائي"
+  finals-100:
+    icon: CROSSBOW
+    stat: finals
+    target: 100
+    xp: 1000
+    coins: 400
+    name: "Executioner"
+    desc: "Get 100 final kills"
+    name-ar: "الجلاد"
+    desc-ar: "اعمل 100 قتل نهائي"
+  beds-10:
+    icon: RED_BED
+    stat: beds
+    target: 10
+    xp: 200
+    coins: 100
+    name: "Bed Breaker"
+    desc: "Destroy 10 beds"
+    name-ar: "كاسر الأسرّة"
+    desc-ar: "دمّر 10 أسرّة"
+  beds-50:
+    icon: TNT
+    stat: beds
+    target: 50
+    xp: 800
+    coins: 300
+    name: "Bed Destroyer"
+    desc: "Destroy 50 beds"
+    name-ar: "مدمر الأسرّة"
+    desc-ar: "دمّر 50 سرير"
+  beds-250:
+    icon: DRAGON_EGG
+    stat: beds
+    target: 250
+    xp: 2500
+    coins: 1000
+    name: "Bed Nightmare"
+    desc: "Destroy 250 beds"
+    name-ar: "كابوس الأسرّة"
+    desc-ar: "دمّر 250 سرير"
+  games-10:
+    icon: CLOCK
+    stat: games
+    target: 10
+    xp: 100
+    coins: 50
+    name: "Rookie"
+    desc: "Play 10 matches"
+    name-ar: "مبتدئ"
+    desc-ar: "العب 10 ماتشات"
+  games-100:
+    icon: BOOK
+    stat: games
+    target: 100
+    xp: 800
+    coins: 300
+    name: "Veteran"
+    desc: "Play 100 matches"
+    name-ar: "محارب قديم"
+    desc-ar: "العب 100 ماتش"
+  streak-3:
+    icon: BLAZE_POWDER
+    stat: beststreak
+    target: 3
+    xp: 300
+    coins: 150
+    name: "On Fire"
+    desc: "Win 3 matches in a row"
+    name-ar: "نار"
+    desc-ar: "اكسب 3 ماتشات ورا بعض"
+  streak-5:
+    icon: MAGMA_CREAM
+    stat: beststreak
+    target: 5
+    xp: 700
+    coins: 300
+    name: "Unstoppable"
+    desc: "Win 5 matches in a row"
+    name-ar: "مفيش حد يوقفه"
+    desc-ar: "اكسب 5 ماتشات ورا بعض"
+  level-10:
+    icon: EXPERIENCE_BOTTLE
+    stat: level
+    target: 10
+    xp: 0
+    coins: 100
+    name: "Level 10"
+    desc: "Reach BedWars level 10"
+    name-ar: "ليفل 10"
+    desc-ar: "وصّل ليفل البيدوارز 10"
+  level-25:
+    icon: EMERALD
+    stat: level
+    target: 25
+    xp: 0
+    coins: 300
+    name: "Level 25"
+    desc: "Reach BedWars level 25"
+    name-ar: "ليفل 25"
+    desc-ar: "وصّل ليفل البيدوارز 25"
+  level-50:
+    icon: BEACON
+    stat: level
+    target: 50
+    xp: 0
+    coins: 1000
+    name: "Level 50"
+    desc: "Reach BedWars level 50"
+    name-ar: "ليفل 50"
+    desc-ar: "وصّل ليفل البيدوارز 50"
+  game-kills-5:
+    icon: STONE_SWORD
+    stat: game-kills
+    target: 5
+    xp: 150
+    coins: 75
+    name: "Killing Spree"
+    desc: "Kill 5 players in one match"
+    name-ar: "سلسلة قتل"
+    desc-ar: "اقتل 5 لاعبين في ماتش واحد"
+  game-kills-10:
+    icon: GOLDEN_SWORD
+    stat: game-kills
+    target: 10
+    xp: 400
+    coins: 200
+    name: "Rampage"
+    desc: "Kill 10 players in one match"
+    name-ar: "هيجان"
+    desc-ar: "اقتل 10 لاعبين في ماتش واحد"
+  game-beds-3:
+    icon: OBSIDIAN
+    stat: game-beds
+    target: 3
+    xp: 300
+    coins: 150
+    name: "Bed Hunter"
+    desc: "Destroy 3 beds in one match"
+    name-ar: "صياد الأسرّة"
+    desc-ar: "دمّر 3 أسرّة في ماتش واحد"
+  void-5:
+    icon: ENDER_PEARL
+    stat: voidkills
+    target: 5
+    xp: 200
+    coins: 100
+    name: "Void Pusher"
+    desc: "Knock 5 players into the void"
+    name-ar: "دافع الفويد"
+    desc-ar: "وقّع 5 لاعبين في الفويد"
+  void-25:
+    icon: ENDER_EYE
+    stat: voidkills
+    target: 25
+    xp: 800
+    coins: 300
+    name: "Void Master"
+    desc: "Knock 25 players into the void"
+    name-ar: "سيد الفويد"
+    desc-ar: "وقّع 25 لاعب في الفويد"
+  flawless:
+    icon: TOTEM_OF_UNDYING
+    stat: flawless
+    target: 1
+    xp: 300
+    coins: 150
+    name: "Flawless Victory"
+    desc: "Win a match without dying once"
+    name-ar: "فوز بلا خسارة"
+    desc-ar: "اكسب ماتش من غير ما تموت ولا مرة"

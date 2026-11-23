@@ -1,0 +1,40 @@
+# ===========================================================================
+#  BedWarsX - TAB list (header / footer)            Author: ASHRAF ELHENAWY
+#  Two sections: "hub" (BedWars lobby tab) and "game" (tab inside a match).
+#  Reload with /bw reload
+#  Placeholders (all sections): %player% %level% %wins% %kills% %beds% %finals%
+#    %deaths% %games% %losses% %xp% %online% %ingame% %party%
+#  Extra placeholders in "game":  %map% %mode% %team% %players% %max%
+# ===========================================================================
+
+# true = the lobby and every match have their OWN player list: in the lobby you only see lobby players
+# in the TAB, inside a match only the players of that match (nobody sees the players of other games).
+separate-lobby-and-games: true
+
+# Shown to players in the BedWars lobby (and anywhere outside a match).
+hub:
+  enabled: true
+  header:
+    - "&8&m------------------------------"
+    - "&b&lBEDWARSX NETWORK"
+    - "&7BedWars Minigame"
+    - "&8&m------------------------------"
+  footer:
+    - "&8&m------------------------------"
+    - "&7Level: &b%level%✫ &8| &7Wins: &a%wins%"
+    - "&7Online: &a%online% &8| &7In games: &c%ingame%"
+    - "&ewww.yourserver.net"
+
+# Shown to players inside a match (waiting, playing, ending).
+game:
+  enabled: true
+  header:
+    - "&8&m------------------------------"
+    - "&b&lBED WARS &8- &f%mode%"
+    - "&7Map: &a%map%"
+    - "&8&m------------------------------"
+  footer:
+    - "&8&m------------------------------"
+    - "&7Team: %team% &8| &7Players: &a%players%/%max%"
+    - "&7Party: &d%party%"
+    - "&ewww.yourserver.net"

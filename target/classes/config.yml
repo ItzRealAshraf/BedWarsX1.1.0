@@ -1,0 +1,80 @@
+language: en               # en | ar  (files: plugins/BedWarsX/messages_<lang>.yml)
+
+party:
+  max-size: 4
+
+levels:
+  chat-prefix: true        # show [12✫] before names in game/lobby chat
+
+xp:                        # XP rewards (level = 1 + sqrt(xp / 100))
+  kill: 10
+  final-kill: 25
+  bed: 25
+  win: 100
+  play: 20
+
+coins:                     # Coins earned (0 = nothing). Used to buy cosmetics: /bw cosmetics
+  messages: true           # show "+5 Coins" in chat
+  kill: 5
+  final-kill: 10
+  bed: 15
+  win: 50
+  play: 10
+
+base-protection:           # nobody can build inside a team's base (stops enemies from trapping / griefing the spawn area)
+  enabled: true
+  radius: 3                # blocks around the team spawn and the team generator spot (a cube)
+  allow-own-team: false    # true = the team itself may still build inside its own base (enemies never can)
+
+end-podium:                # end of every match: the top 3 players of the match as NPC-style figures with their own skin
+  enabled: true
+  teleport-players: true   # take everybody to the spectator spot (/bw edit <arena> setSpec) to watch the podium
+
+void:                      # falling under the arena's void level (/bw edit <arena> setVoid)
+  damage-mode: true        # true = the void HURTS you over time, you die only when your health runs out. false = instant death
+  damage: 4.0              # health points lost per hit (2.0 = 1 heart, 4.0 = 2 hearts)
+  interval-ticks: 10       # time between two hits (20 ticks = 1 second)
+
+stats:                     # "Best performance" = the game with the highest score
+  performance:             # score = kills x kill + final kills x final-kill + beds x bed
+    kill: 1
+    final-kill: 2
+    bed: 3
+
+# ---------------- BedWarsX config  (by ASHRAF ELHENAWY) ----------------
+
+start-countdown: 20        # seconds once min players reached
+end-countdown: 10          # seconds after a win before the map resets
+respawn-seconds: 5
+offline-rejoin-seconds: 120  # how long a disconnected player can come back
+
+# Generators + game event timings live in generators.yml, the item shop in shop.yml
+# Scoreboards live in scoreboard.yml, TAB in tab.yml, GUI menus + hotbar items + leaderboards in gui.yml
+
+# /bw edit <arena> setSpawn <team> looks for that team's bed within this many blocks of the spawn
+edit:
+  bed-search-radius: 30
+  # true = set up one team at a time: setSpawn first, then bed / shop / upgrade / generator of THAT team,
+  # and the bed must have the colour of the team. Another team can only be started when the current one is done.
+  strict-team-order: true
+
+# commands players may use while inside a game (admins bypass)
+allowed-commands: ["/bw", "/bedwars", "/bwx", "/shout"]
+
+# Dedicated BedWars hub (use /bw sethub while standing at the hub spawn)
+hub:
+  spawn: ""                # BedWars lobby spawn - set with /bw sethub (NOT the map waiting spawn)
+  teleport-on-join: false
+  # "Return to Main Hub" button: sends the player to this proxy server (works on Velocity and BungeeCord).
+  main-server: "lobby"     # the server name from your proxy config
+  # Optional fallback used only when main-server is empty (a command that exists on THIS server).
+  return-command: ""
+
+
+# Admin-created leaderboard holograms are stored automatically under leaderboards.
+
+# Protects the BedWars lobby (the spawn set with /bw sethub): nobody can break / place / burn / blow up anything there.
+# An admin (bwx.admin) turns build mode on / off with /bw build.
+lobby-protection:
+  enabled: true
+  radius: 0                # 0 = the whole lobby world, or a number of blocks around the lobby spawn

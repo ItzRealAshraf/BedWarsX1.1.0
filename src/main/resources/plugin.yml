@@ -1,0 +1,19 @@
+name: BedWarsX
+main: dev.bedwarsx.BedWarsX
+version: 1.1.0
+api-version: 1.16
+authors: [ASHRAF ELHENAWY, ItzRealAshraf]
+softdepend: [PlaceholderAPI]
+description: Multi-version BedWars (1.16 -> latest) without NMS
+commands:
+  bw:
+    description: BedWarsX main command
+    aliases: [bedwars, bwx]
+    usage: /bw help
+  shout:
+    description: Talk to everyone in your BedWars match
+    usage: /shout <message>
+permissions:
+  bwx.admin:
+    description: Setup and admin commands
+    default: op

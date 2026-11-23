@@ -1,0 +1,104 @@
+# ===========================================================================
+#  BedWarsX - scoreboards (sidebar)                Author: ASHRAF ELHENAWY
+#  Max 15 lines per board. Use &-colour codes. Reload with /bw reload
+#
+#  GAME placeholders:
+#    %date% %arena% %map% %mode% %version%
+#    %players% %max% %needed% %countdown% (waiting / starting)
+#    %event% %time% (playing: next event and the time left)
+#    %kills% %finals% %beds% %team% %teams% (playing: the list of team lines)
+#    (%coins% and %level% also work in game boards if you want them)
+#    %result% (ending: VICTORY! for the winning team, Game Over for the others, Draw) - texts: sb-victory / sb-gameover / sb-draw in messages_*.yml
+#  HUB placeholders:
+#    %player% %level% %coins% %wins% %kills% %beds% %finals% %online% %ingame% %party%
+# ===========================================================================
+
+# ------------------------------- in a match (BedWars1058 style) -------------
+game:
+  title: "&e&lBED WARS"
+  date-format: "dd/MM/yy"
+  footer: "&ewww.yourserver.net"
+
+  waiting:                       # before the minimum players joined
+    enabled: true
+    lines:
+      - "&7%date% &8%arena%"
+      - ""
+      - "&fMap: &a%map%"
+      - "&fPlayers: &a%players%/%max%"
+      - ""
+      - "&fWaiting for &a%needed% &fmore..."
+      - ""
+      - "&fMode: &a%mode%"
+      - "&fVersion: &7%version%"
+      - ""
+      - "%footer%"
+
+  starting:                      # countdown running
+    enabled: true
+    lines:
+      - "&7%date% &8%arena%"
+      - ""
+      - "&fMap: &a%map%"
+      - "&fPlayers: &a%players%/%max%"
+      - ""
+      - "&fStarting in &a%countdown%s"
+      - ""
+      - "&fMode: &a%mode%"
+      - "&fVersion: &7%version%"
+      - ""
+      - "%footer%"
+
+  playing:
+    lines:
+      - "&7%date% &8%arena%"
+      - ""
+      - "&f%event% in &a%time%"
+      - ""
+      - "%teams%"                 # one line per team, see team-line below
+      - ""
+      - "&fKills: &a%kills%"
+      - "&fFinal Kills: &a%finals%"
+      - "&fBeds Broken: &a%beds%"
+      - ""
+      - "%footer%"
+    # %color% = team colour, %letter% = first letter, %team% = name, %status%, %you%
+    team-line: "%color%%letter% &f%team%: %status%%you%"
+    status-bed: "&a✔"            # bed still there
+    status-alive: "&a%n%"        # bed destroyed, %n% players alive
+    status-dead: "&c✘"           # team eliminated
+    you: " &7YOU"
+
+  ending:
+    enabled: true
+    lines:
+      - "&7%date% &8%arena%"
+      - ""
+      - "%result%"                # winners: VICTORY!  everybody else: Game Over  (draw: Draw)
+      - "&fResetting in &a%countdown%s"
+      - ""
+      - "&fKills: &a%kills%"
+      - "&fFinal Kills: &a%finals%"
+      - "&fBeds Broken: &a%beds%"
+      - ""
+      - "%footer%"
+
+# ------------------------------- BedWars lobby ------------------------------
+hub:
+  title: "&b&lBEDWARSX"
+  lines:
+    - "&8&m---------------------"
+    - "&b&lBEDWARSX"
+    - "&7Network"
+    - ""
+    - "&fPlayer: &b%player%"
+    - "&fLevel: &a%level% ✫"
+    - "&fWins: &a%wins%"
+    - "&fKills: &a%kills%"
+    - "&fBeds: &a%beds%"
+    - "&fCoins: &6%coins%"
+    - ""
+    - "&fOnline: &a%online%"
+    - "&fIn game: &c%ingame%"
+    - ""
+    - "&ewww.yourserver.net"

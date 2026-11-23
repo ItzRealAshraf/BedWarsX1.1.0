@@ -1,0 +1,40 @@
+# ===========================================================================
+#  BedWarsX - generators & game events             Author: ASHRAF ELHENAWY
+#  Reload with /bw reload (running matches keep their old values)
+#  All intervals are in SECONDS.
+# ===========================================================================
+
+# Generator on every team's island (iron + gold, emeralds with Forge).
+team:
+  iron:
+    interval: 1.0          # seconds between each iron ingot
+    max-stack: 64          # stops spawning when this many are lying around
+  gold:
+    interval: 5.0
+    max-stack: 32
+  emerald:
+    interval: 30.0         # team emeralds only exist with the Forge upgrade
+    max-stack: 8
+    requires-forge: 3      # Forge tier needed (3 = "Emerald Forge")
+    forge-4-speed: 1.5     # speed multiplier at Forge tier 4
+
+# Forge upgrade speed multipliers for tier 0,1,2,3,4 (iron + gold)
+forge-multipliers: [1.0, 1.5, 2.0, 2.0, 3.0]
+
+# Map generators (placed with /bw addGenerator diamond|emerald). One value per tier.
+diamond:
+  tiers: [30, 23, 12]
+  max-stack: 8
+emerald:
+  tiers: [60, 45, 30]
+  max-stack: 8
+
+# Seconds since the game started when each event happens.
+events:
+  diamond-2: 360
+  emerald-2: 720
+  diamond-3: 1080
+  emerald-3: 1440
+  bed-gone: 1800
+  sudden-death: 2400
+  end: 3000

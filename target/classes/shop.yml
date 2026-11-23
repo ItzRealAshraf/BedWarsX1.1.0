@@ -1,0 +1,99 @@
+# ===========================================================================
+#  BedWarsX - SHOP (item shop + team upgrades)      Author: ASHRAF ELHENAWY
+#  Reload with /bw reload.   Currencies: IRON_INGOT, GOLD_INGOT, DIAMOND, EMERALD
+#
+#  - shop.categories : the tabs at the top of the shop (max 9, in this order).
+#                      The first one MUST stay "Quick Buy" (the player's favourites).
+#  - shop.items      : every item. category = one of the categories above.
+#  - Special items (wool/clay/glass take the team colour; pick/axe use the tier
+#    list below; Fireball, Dream Defender, Pop-up Tower and Magic Milk keep their
+#    in-game item names because the plugin recognises them by name).
+#  - upgrades        : prices (in DIAMONDS) of the team upgrade shop.
+# ===========================================================================
+
+shop:
+  title: "&8Item Shop - %category%"      # %category% = the open tab
+  quick-buy-default: [wool, stonesword, chain, pick, bow, speed, tnt, water]
+
+  categories:
+    "Quick Buy":
+      icon: NETHER_STAR
+    "Blocks":
+      icon: TERRACOTTA
+    "Melee":
+      icon: GOLDEN_SWORD
+    "Armor":
+      icon: CHAINMAIL_BOOTS
+    "Tools":
+      icon: STONE_PICKAXE
+    "Ranged":
+      icon: BOW
+    "Potions":
+      icon: BREWING_STAND
+    "Utility":
+      icon: TNT
+
+  items:
+    wool: {category: "Blocks", icon: WHITE_WOOL, amount: 16, name: "Wool", currency: IRON_INGOT, cost: 4}
+    clay: {category: "Blocks", icon: TERRACOTTA, amount: 16, name: "Hardened Clay", currency: IRON_INGOT, cost: 12}
+    glass: {category: "Blocks", icon: GLASS, amount: 4, name: "Blast-Proof Glass", currency: IRON_INGOT, cost: 12}
+    endstone: {category: "Blocks", icon: END_STONE, amount: 12, name: "End Stone", currency: IRON_INGOT, cost: 24}
+    ladder: {category: "Blocks", icon: LADDER, amount: 16, name: "Ladder", currency: IRON_INGOT, cost: 4}
+    planks: {category: "Blocks", icon: OAK_PLANKS, amount: 16, name: "Oak Wood Planks", currency: GOLD_INGOT, cost: 4}
+    obsidian: {category: "Blocks", icon: OBSIDIAN, amount: 4, name: "Obsidian", currency: EMERALD, cost: 4}
+    stonesword: {category: "Melee", icon: STONE_SWORD, amount: 1, name: "Stone Sword", currency: IRON_INGOT, cost: 10}
+    ironsword: {category: "Melee", icon: IRON_SWORD, amount: 1, name: "Iron Sword", currency: GOLD_INGOT, cost: 7}
+    diasword: {category: "Melee", icon: DIAMOND_SWORD, amount: 1, name: "Diamond Sword", currency: EMERALD, cost: 4}
+    kbstick: {category: "Melee", icon: STICK, amount: 1, name: "Knockback Stick", currency: GOLD_INGOT, cost: 5}
+    chain: {category: "Armor", icon: CHAINMAIL_BOOTS, amount: 1, name: "Permanent Chainmail Armor", currency: IRON_INGOT, cost: 40}
+    iron: {category: "Armor", icon: IRON_BOOTS, amount: 1, name: "Permanent Iron Armor", currency: GOLD_INGOT, cost: 12}
+    diamond: {category: "Armor", icon: DIAMOND_BOOTS, amount: 1, name: "Permanent Diamond Armor", currency: EMERALD, cost: 6}
+    shears: {category: "Tools", icon: SHEARS, amount: 1, name: "Shears", currency: IRON_INGOT, cost: 20}
+    pick: {category: "Tools", icon: WOODEN_PICKAXE, amount: 1, name: "Pickaxe", currency: IRON_INGOT, cost: 10}
+    axe: {category: "Tools", icon: WOODEN_AXE, amount: 1, name: "Axe", currency: IRON_INGOT, cost: 10}
+    arrows: {category: "Ranged", icon: ARROW, amount: 8, name: "Arrow", currency: GOLD_INGOT, cost: 2}
+    bow: {category: "Ranged", icon: BOW, amount: 1, name: "Bow", currency: GOLD_INGOT, cost: 12}
+    bow2: {category: "Ranged", icon: BOW, amount: 1, name: "Bow (Power I)", currency: GOLD_INGOT, cost: 24}
+    bow3: {category: "Ranged", icon: BOW, amount: 1, name: "Bow (Power I, Punch I)", currency: EMERALD, cost: 6}
+    speed: {category: "Potions", icon: POTION, amount: 1, name: "Speed II Potion (45s)", currency: EMERALD, cost: 1}
+    jump: {category: "Potions", icon: POTION, amount: 1, name: "Jump V Potion (45s)", currency: EMERALD, cost: 1}
+    invis: {category: "Potions", icon: POTION, amount: 1, name: "Invisibility Potion (30s)", currency: EMERALD, cost: 2}
+    gapple: {category: "Utility", icon: GOLDEN_APPLE, amount: 1, name: "Golden Apple", currency: GOLD_INGOT, cost: 3}
+    bedbug: {category: "Utility", icon: SNOWBALL, amount: 1, name: "Bed Bug", currency: IRON_INGOT, cost: 24}
+    golem: {category: "Utility", icon: GHAST_TEAR, amount: 1, name: "Dream Defender", currency: IRON_INGOT, cost: 120}
+    fireball: {category: "Utility", icon: FIRE_CHARGE, amount: 1, name: "Fireball", currency: IRON_INGOT, cost: 40}
+    tnt: {category: "Utility", icon: TNT, amount: 1, name: "TNT", currency: GOLD_INGOT, cost: 4}
+    pearl: {category: "Utility", icon: ENDER_PEARL, amount: 1, name: "Ender Pearl", currency: EMERALD, cost: 4}
+    water: {category: "Utility", icon: WATER_BUCKET, amount: 1, name: "Water Bucket", currency: GOLD_INGOT, cost: 3}
+    tower: {category: "Utility", icon: CHEST, amount: 1, name: "Pop-up Tower", currency: IRON_INGOT, cost: 24}
+    egg: {category: "Utility", icon: EGG, amount: 1, name: "Bridge Egg", currency: EMERALD, cost: 1}
+    milk: {category: "Utility", icon: MILK_BUCKET, amount: 1, name: "Magic Milk", currency: GOLD_INGOT, cost: 4}
+    sponge: {category: "Utility", icon: SPONGE, amount: 4, name: "Sponge", currency: GOLD_INGOT, cost: 3}
+
+  # Pickaxe / axe upgrade tiers (4 each). The shop sells the next tier every time.
+  tools:
+    pickaxe:
+      - {icon: WOODEN_PICKAXE, name: "Wooden Pickaxe", currency: IRON_INGOT, cost: 10, efficiency: 1}
+      - {icon: IRON_PICKAXE, name: "Iron Pickaxe", currency: IRON_INGOT, cost: 10, efficiency: 2}
+      - {icon: GOLDEN_PICKAXE, name: "Golden Pickaxe", currency: GOLD_INGOT, cost: 3, efficiency: 3}
+      - {icon: DIAMOND_PICKAXE, name: "Diamond Pickaxe", currency: GOLD_INGOT, cost: 6, efficiency: 3}
+    axe:
+      - {icon: WOODEN_AXE, name: "Wooden Axe", currency: IRON_INGOT, cost: 10, efficiency: 1}
+      - {icon: STONE_AXE, name: "Stone Axe", currency: IRON_INGOT, cost: 10, efficiency: 1}
+      - {icon: IRON_AXE, name: "Iron Axe", currency: GOLD_INGOT, cost: 3, efficiency: 2}
+      - {icon: DIAMOND_AXE, name: "Diamond Axe", currency: GOLD_INGOT, cost: 6, efficiency: 3}
+
+upgrades:
+  title: "&8Team Upgrades & Traps"
+  sharpened-swords:
+    cost: 4
+  reinforced-armor:
+    costs: [2, 4, 8, 16]        # tier I, II, III, IV
+  maniac-miner:
+    costs: [2, 4]
+  iron-forge:
+    costs: [2, 4, 6, 8]
+  heal-pool:
+    cost: 1
+  traps:
+    costs: [1, 2, 4]            # 1st, 2nd, 3rd trap in the queue

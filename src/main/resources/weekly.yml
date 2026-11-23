@@ -1,0 +1,84 @@
+# ===========================================================================
+#  BedWarsX - weekly missions (new in 1.1.0)               Author: ASHRAF ELHENAWY
+#  They show at the top of /bw achievements. Every Monday the progress and the completed
+#  missions of every player are reset, so they can be completed (and rewarded) again.
+#  Lifetime stats (wins, kills, level, coins ...) are NEVER reset - only the weekly counters are.
+#
+#  stat: wins, kills, finals, beds, games, deaths, voidkills, flawless   -> counted during the current week
+#        game-kills, game-finals, game-beds                              -> reached inside ONE match
+#  Reload with /bw reload.  enabled: false on a block hides it.
+# ===========================================================================
+
+enabled: true
+
+missions:
+  kills-25:
+    icon: IRON_SWORD
+    stat: kills
+    target: 25
+    xp: 200
+    coins: 100
+    name: "Hunter of the Week"
+    desc: "Get 25 kills this week"
+    name-ar: "صياد الأسبوع"
+    desc-ar: "اعمل 25 كيل الأسبوع ده"
+  wins-3:
+    icon: GOLDEN_APPLE
+    stat: wins
+    target: 3
+    xp: 250
+    coins: 150
+    name: "Weekly Winner"
+    desc: "Win 3 matches this week"
+    name-ar: "فايز الأسبوع"
+    desc-ar: "اكسب 3 ماتشات الأسبوع ده"
+  beds-10:
+    icon: RED_BED
+    stat: beds
+    target: 10
+    xp: 200
+    coins: 100
+    name: "Bed Breaker"
+    desc: "Destroy 10 beds this week"
+    name-ar: "كسّار الأسرة"
+    desc-ar: "اكسر 10 أسرة الأسبوع ده"
+  finals-15:
+    icon: DIAMOND_SWORD
+    stat: finals
+    target: 15
+    xp: 250
+    coins: 120
+    name: "Final Blow"
+    desc: "Get 15 final kills this week"
+    name-ar: "الضربة الأخيرة"
+    desc-ar: "اعمل 15 فاينال كيل الأسبوع ده"
+  games-10:
+    icon: CLOCK
+    stat: games
+    target: 10
+    xp: 150
+    coins: 80
+    name: "Dedicated Player"
+    desc: "Play 10 matches this week"
+    name-ar: "لاعب مواظب"
+    desc-ar: "العب 10 ماتشات الأسبوع ده"
+  voidkills-5:
+    icon: ENDER_PEARL
+    stat: voidkills
+    target: 5
+    xp: 150
+    coins: 80
+    name: "Void Pusher"
+    desc: "Knock 5 players into the void this week"
+    name-ar: "راكل الفراغ"
+    desc-ar: "ارمي 5 لاعيبة في الفويد الأسبوع ده"
+  game-kills-8:
+    icon: BOW
+    stat: game-kills
+    target: 8
+    xp: 300
+    coins: 150
+    name: "Rampage"
+    desc: "Get 8 kills inside a single match"
+    name-ar: "المجزرة"
+    desc-ar: "اعمل 8 كيلز في ماتش واحد"

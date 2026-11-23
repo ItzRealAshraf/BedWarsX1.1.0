@@ -1,0 +1,25 @@
+name: Build BedWarsX
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - name: Build
+        run: mvn -B clean package
+      - name: Check the jar really contains the classes
+        run: |
+          unzip -l target/BedWarsX.jar | grep -E "dev/bedwarsx/BedWarsX.class|plugin.yml"
+          unzip -p target/BedWarsX.jar plugin.yml | grep -q '^main: dev.bedwarsx.BedWarsX$'
+          test "$(unzip -l target/BedWarsX.jar | grep -c '\.class')" -gt 10
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BedWarsX
+          path: target/BedWarsX.jar

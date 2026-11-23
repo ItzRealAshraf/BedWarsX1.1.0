@@ -1,0 +1,378 @@
+# ===========================================================================
+#  BedWarsX - GUI menus (names, icons, lore, slots)  Author: ASHRAF ELHENAWY
+#  Sections: map-selector, mode-menu, map-list, party-menu, hotbar (lobby / waiting /
+#  spectator items) and leaderboard (hologram format). The item shop is in shop.yml.
+#  material = any Bukkit material name. slot = 0-based. Reload with /bw reload
+#  Every lobby menu is ONE chest (27 slots: 0-26). A slot outside 0-26 is ignored and the default is used.
+#  Placeholders: %mode% %desc% %playing% %maps% %open% (selector / mode menu)
+#                %map% %state% %players% %max% (map list)
+# ===========================================================================
+
+# ---- 1) Map Selector (compass in the lobby): the 6 game types --------------
+map-selector:
+  title: "&8Map Selector"
+  modes:
+    solo:
+      slot: 11
+      material: RED_BED
+      name: "&a&lBed Wars Solo"
+      desc: "8 teams of 1 player"
+    doubles:
+      slot: 13
+      material: BLUE_BED
+      name: "&a&lBed Wars Doubles"
+      desc: "8 teams of 2 players"
+    3v3v3v3:
+      slot: 15
+      material: GREEN_BED
+      name: "&a&lBed Wars 3v3v3v3"
+      desc: "4 teams of 3 players"
+    4v4v4v4:
+      slot: 20
+      material: YELLOW_BED
+      name: "&a&lBed Wars 4v4v4v4"
+      desc: "4 teams of 4 players"
+    1v1:
+      slot: 22
+      material: IRON_SWORD
+      name: "&a&lBed Wars 1v1"
+      desc: "2 teams of 1 player"
+    4v4:
+      slot: 24
+      material: DIAMOND_SWORD
+      name: "&a&lBed Wars 4v4"
+      desc: "2 teams of 4 players"
+  mode-lore:
+    - "&7%desc%"
+    - ""
+    - "&7Currently playing: &a%playing%"
+    - "&7Maps: &a%maps%"
+    - ""
+    - "&eClick to open!"
+  close:
+    slot: 26
+    material: BARRIER
+    name: "&cClose"
+    lore: []
+
+# ---- 1b) Stats menu (/bw stats [player] or the player head in the lobby hotbar) ----
+# 5 rows (slots 0-44). Placeholders: %player% %level% %next% %xp% %xp_into% %xp_needed% %percent% %bar%
+#   %wins% %losses% %games% %wl% %kills% %finals% %beds% %deaths% %kd% %streak% %beststreak%
+#   %bestscore% %bestkills% %bestfinals% %bestbeds% %coins% %ach% %ach_total%
+stats-menu:
+  title: "&8%player% &7» &6Stats"
+  filler:
+    material: BLACK_STAINED_GLASS_PANE
+    accent: ORANGE_STAINED_GLASS_PANE
+  head:
+    name: "&e&l%player%"
+    lore:
+      - "&8&m                          "
+      - "&7Level: &6&l%level%&e\u272B"
+      - "&7Games played: &f%games%"
+      - "&7Wins: &a%wins% &8(&7W/L &f%wl%&8)"
+      - "&8&m                          "
+  items:
+    level:
+      slot: 22
+      material: EXPERIENCE_BOTTLE
+      name: "&6&lLEVEL &e%level%&6\u272B"
+      lore:
+        - ""
+        - "&7Progress to level &e%next%&7:"
+        - "%bar% &f%percent%%"
+        - "&7XP: &b%xp_into%&8/&b%xp_needed%"
+        - ""
+        - "&7Total XP: &b%xp%"
+    achievements:
+      slot: 31
+      material: BOOK
+      name: "&6&lACHIEVEMENTS"
+      lore: ["", "&7Completed: &a&l%ach%&7/&a%ach_total%", "&7Coins: &6%coins%", "", "&eClick to open"]
+    wins:
+      slot: 20
+      material: NETHER_STAR
+      name: "&a&lWINS"
+      lore: ["", "&7Total wins: &a&l%wins%", "&7Losses: &c%losses%", "&7W/L ratio: &f%wl%"]
+    kills:
+      slot: 21
+      material: IRON_SWORD
+      name: "&c&lKILLS"
+      lore: ["", "&7Total kills: &c&l%kills%", "&7Deaths: &7%deaths%", "&7K/D ratio: &f%kd%"]
+    finals:
+      slot: 23
+      material: DIAMOND_SWORD
+      name: "&b&lFINAL KILLS"
+      lore: ["", "&7Total final kills: &b&l%finals%"]
+    beds:
+      slot: 24
+      material: RED_BED
+      name: "&d&lBEDS BROKEN"
+      lore: ["", "&7Total beds broken: &d&l%beds%"]
+    games:
+      slot: 28
+      material: PAPER
+      name: "&f&lGAMES PLAYED"
+      lore: ["", "&7Games: &f&l%games%", "&7Wins: &a%wins% &8| &7Losses: &c%losses%"]
+    streak:
+      slot: 30
+      material: BLAZE_POWDER
+      name: "&6&lWIN STREAK"
+      lore: ["", "&7Current streak: &e%streak%", "&7Best streak: &6&l%beststreak%"]
+    performance:
+      slot: 32
+      material: TOTEM_OF_UNDYING
+      name: "&5&lBEST PERFORMANCE"
+      lore:
+        - ""
+        - "&7Your best game:"
+        - " &8\u25AA &7Kills: &c%bestkills%"
+        - " &8\u25AA &7Final kills: &b%bestfinals%"
+        - " &8\u25AA &7Beds broken: &d%bestbeds%"
+        - ""
+        - "&7Score: &5&l%bestscore%"
+    kd:
+      slot: 34
+      material: SKELETON_SKULL
+      name: "&7&lRATIOS"
+      lore: ["", "&7K/D: &f&l%kd%", "&7W/L: &f&l%wl%", "&7Deaths: &c%deaths%"]
+    close:
+      slot: 40
+      material: BARRIER
+      name: "&cClose"
+      lore: []
+
+# ---- 2) "Bed Wars <mode>" menu ---------------------------------------------
+mode-menu:
+  title: "&8Bed Wars %mode%"
+  play:                          # red bed = join the best available map
+    slot: 12
+    material: RED_BED
+    name: "&a&lPlay Bed Wars %mode%"
+    lore:
+      - "&7Join the best available game"
+      - "&7of this mode."
+      - ""
+      - "&7Currently playing: &a%playing%"
+      - "&7Open maps: &a%open%"
+      - ""
+      - "&eClick to play!"
+  maps:                          # sign = choose the map yourself
+    slot: 14
+    material: OAK_SIGN
+    name: "&a&lMap Selector"
+    lore:
+      - "&7Pick the exact map you want"
+      - "&7to play on."
+      - ""
+      - "&eClick to browse maps!"
+  back:
+    slot: 18
+    material: WHITE_CONCRETE
+    name: "&aGo Back"
+    lore: ["&7Back to the Map Selector"]
+  close:
+    slot: 22
+    material: BARRIER
+    name: "&cClose"
+    lore: []
+  random:                        # ender pearl = random map
+    slot: 26
+    material: ENDER_PEARL
+    name: "&a&lRandom Map"
+    lore:
+      - "&7Join a random available map"
+      - "&7of this mode."
+      - ""
+      - "&eClick to play!"
+
+# ---- 3) Map list (opened by the sign) ----------------------------------------
+map-list:
+  title: "&8%mode% - Select a Map"
+  open:
+    material: RED_BED
+    name: "&a&l%map%"
+    lore:
+      - "&7Mode: &f%mode%"
+      - "&7Players: &e%players%/%max%"
+      - "&7State: &f%state%"
+      - ""
+      - "&eClick to join this map"
+  closed:
+    material: GRAY_DYE
+    name: "&7&l%map%"
+    lore:
+      - "&7Mode: &f%mode%"
+      - "&7Players: &e%players%/%max%"
+      - "&7State: &f%state%"
+      - ""
+      - "&cNot joinable right now"
+  none:                          # shown in the middle when there is no map (slot is fixed: 13)
+    material: BARRIER
+    name: "&cNo maps for %mode%"
+    lore: ["&7Please try again later."]
+  back:
+    slot: 18
+    material: ARROW
+    name: "&aGo Back"
+    lore: ["&7Back to Bed Wars %mode%"]
+  refresh:
+    slot: 22
+    material: SUNFLOWER
+    name: "&eRefresh"
+    lore: ["&7Refresh the map list"]
+
+# ---- 4) Party menu (Party Menu item in the BedWars lobby) -------------------
+# Placeholders: %members% %max% %leader% (status book only)
+party-menu:
+  title: "&8BedWars &7» &5Party Manager"
+  status:
+    slot: 4
+    material: BOOK
+    name: "&d&lPARTY STATUS"
+    lore-none:
+      - "&7You are not in a party."
+      - "&7Create a party or invite a friend."
+      - "&8Party members stay together when joining a map."
+    lore-party:
+      - "&7Members: &f%members%&7/&f%max%"
+      - "&7Leader: &f%leader%"
+      - "&8Party members stay together when joining a map."
+  roster:                         # heads of the members (top row, around the book); the leader clicks one to kick
+    leader-prefix: "&6★ &f"
+    member-prefix: "&7• &f"
+    lore-self: "&7This is you."
+    lore-kick: "&cClick to kick this member"
+    lore-not-leader: "&7Only the party leader can kick members."
+  invite-head:                    # online players that can be invited (middle row, 9 per page - Refresh = next page)
+    prefix: "&aInvite &f"
+    lore: "&7Click to send a party invite"
+  no-players:                     # shown in the middle row when nobody can be invited (slot is fixed: 13)
+    material: GRAY_DYE
+    name: "&7No players available"
+    lore: ["&7There are no players to invite right now."]
+  create:
+    slot: 18
+    material: NAME_TAG
+    name: "&a&lCreate Party"
+    lore: ["&7Create a new party with you as leader."]
+  leave:
+    slot: 18
+    material: REDSTONE
+    name: "&c&lLeave Party"
+    lore: ["&7Leave your current party."]
+  refresh:
+    slot: 19
+    material: SUNFLOWER
+    name: "&e&lRefresh Menu"
+    lore:
+      - "&7Refresh online players and party status."
+      - "&7Click again to see more players."
+      - "&8Page %page%/%pages%"
+  quick-join:
+    slot: 20
+    material: COMPASS
+    name: "&b&lQuick Join"
+    lore:
+      - "&7Join the best available map."
+      - "&7Your party joins together if you are leader."
+  accept:
+    slot: 22
+    material: EMERALD
+    name: "&a&lAccept Party Invite"
+    lore: ["&7Click to accept your pending invite."]
+  no-invite:
+    slot: 22
+    material: GRAY_DYE
+    name: "&7No Pending Invite"
+    lore: ["&7Party invites will appear here."]
+  invite-info:
+    slot: 24
+    material: PLAYER_HEAD
+    name: "&e&lInvite Friends"
+    lore:
+      - "&7Click a player head in the middle row."
+      - "&7Invites expire after 60 seconds."
+  disband:
+    slot: 26
+    material: BARRIER
+    name: "&c&lDisband Party"
+    lore: ["&7Disband the party for everyone."]
+  disband-locked:
+    slot: 26
+    material: BARRIER
+    name: "&8Disband Party"
+    lore: ["&7Only the party leader can disband."]
+
+# ---- 5) Hotbar items (slot 0-8) --------------------------------------------
+# The plugin recognises the items by an invisible id, so you can rename / re-icon / move them freely.
+hotbar:
+  hub:                            # given in the BedWars lobby
+    map-selector:
+      slot: 0
+      material: COMPASS
+      name: "&b&lMap Selector"
+      lore: ["&7Choose a map and game mode"]
+    party-menu:
+      slot: 4
+      material: CRAFTING_TABLE
+      name: "&e&lParty Menu"
+      lore: ["&7Invite friends and manage your party"]
+    stats-menu:
+      slot: 3
+      material: PLAYER_HEAD       # shows the skin of the player who holds it
+      name: "&6&lYour Stats"
+      lore: ["&7Right click to see your stats"]
+    cosmetics:
+      slot: 5
+      material: ENDER_CHEST
+      name: "&d&lCosmetics"
+      lore: ["&7Kill effects, trails, bed designs...", "&7Right click to open"]
+    main-hub:
+      slot: 8
+      material: RED_BED
+      name: "&c&lReturn to Main Hub"
+      lore: ["&7Return to the main network hub"]
+  waiting:                        # given while waiting for the game to start
+    team-selector:
+      slot: 0
+      material: NETHER_STAR
+      name: "&aTeam Selector"
+      lore: ["&7Right click to choose a team"]
+    leave:
+      slot: 8
+      material: RED_BED
+      name: "&cLeave"
+      lore: ["&7Right click to leave"]
+  tp-kit:                         # an admin who uses /bw tp <map> only gets this bed (his real items come back in the lobby)
+    tp-return:
+      slot: 4
+      material: RED_BED
+      name: "&c&lReturn to BedWars Lobby"
+      lore: ["&7Right click to go back and get your items"]
+  spectator:                      # given after your final death
+    teleporter:
+      slot: 0
+      material: COMPASS
+      name: "&aSpectator Teleporter"
+      lore: ["&7Right click to teleport to a player"]
+    play-again:
+      slot: 4
+      material: ENDER_EYE
+      name: "&bPlay Again"
+      lore: ["&7Right click to join a new game"]
+    lobby:
+      slot: 8
+      material: RED_BED
+      name: "&cBedWars Lobby"
+      lore: ["&7Right click to leave the game and return to the BedWars lobby"]
+
+# ---- 6) Leaderboard holograms (/bw leaderboard create <wins|kills|finals|beds>) ----
+# Always shows `size` rows - free places show empty-name / empty-value instead of "No stats".
+# Placeholders: %type% (title) | %rank% %player% %value% (line)
+leaderboard:
+  size: 10
+  title: "&b&lBEDWARS TOP %type%"
+  line: "&e%rank%. &f%player% &7- &a%value%"
+  empty-name: "&7---"
+  empty-value: "0"

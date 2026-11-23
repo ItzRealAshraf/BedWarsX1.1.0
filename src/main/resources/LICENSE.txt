@@ -1,0 +1,13 @@
+BedWarsX
+Copyright (c) 2026 ASHRAF ELHENAWY (ItzRealAshraf). All rights reserved.
+
+Author / owner: ASHRAF ELHENAWY, also known as ItzRealAshraf.
+
+You may run this plugin on your own Minecraft server. Without written permission from the author you may NOT:
+  - copy, re-upload, share or sell the plugin or its source code,
+  - claim it as your own work or re-brand it,
+  - remove or change the author credits (plugin.yml authors, console banner, /bw about).
+
+The plugin checks its own credits at start-up and switches itself off when they were removed or changed.
+
+THE PLUGIN IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.

@@ -1,0 +1,190 @@
+# ===========================================================================
+#  BedWarsX - Cosmetics (Kill / Final Kill / Victory / Death effects, Trails, Projectile effects,
+#  Bed designs and Shop NPC skins).  Author: ASHRAF ELHENAWY.  Reload with /bw reload
+#
+#  HOW IT WORKS
+#   * Players earn Coins in games (config.yml -> coins) and buy cosmetics in the Cosmetics chest (/bw cosmetics
+#     or the ender chest in the BedWars lobby).
+#   * free-all: true  -> EVERYTHING is unlocked and free for everyone.
+#   * price: 0        -> that cosmetic is free.   price: 500 -> costs 500 coins.   enabled: false -> hidden.
+#   * permission: "bwx.cos.vip" -> anyone with that permission gets it without paying.
+#   * Admin: /bw coins <give|take|set> <player> <n>   |   /bw cosmetics give <player> <category.id|all>
+#
+#  ITEM FIELDS
+#   name, material (icon), price, lore, type, particle: [A|B]  ("A|B" = use A, or B on versions where A was renamed)
+#   type:  burst (kill/final/death), column, helix, ring, rain (animated), lightning (strikes: N), firework (shape, colors)
+#          trail (trail + projectile categories)   aura (bed, decor: floating item)   npc (entity, profession, villager-type)
+#   count, spread, speed, height-offset, radius, height, duration (ticks), interval (victory: ticks between repeats)
+#   sound (e.g. entity.generic.explode), volume, pitch, colors: ["ff0000"], rainbow: true, size (dust size), block (for BLOCK particles)
+# ===========================================================================
+
+enabled: true
+free-all: false
+
+# Texts of the menus
+menu:
+  main-title: "&8Cosmetics"
+  coins-name: "&6&lCOINS: &e%coins%"
+  main-selected: "&7Selected: %name%"
+  main-unlocked: "&7Unlocked: &a%owned%&8/&a%total%"
+  main-click: "&eClick to open!"
+  selected: "&a&l\u2714 SELECTED"
+  unlocked: "&aUnlocked"
+  click-select: "&eClick to select!"
+  click-deselect: "&7Click to unequip"
+  price: "&7Price: &6%price% Coins"
+  click-buy: "&eClick to buy!"
+  click-confirm: "&a&lClick again to confirm!"
+  no-coins: "&cNot enough Coins! &7(You have &6%coins%&7)"
+  none-name: "&c&lNo Effect"
+  none-lore: "&7Click to remove your equipped effect"
+  back: "&aBack"
+  prev: "&ePrevious page (%page%/%pages%)"
+  next: "&eNext page (%page%/%pages%)"
+
+categories:
+  kill:
+    name: "&c&lKill Effects"
+    title: "&8Kill Effects"
+    icon: REDSTONE_BLOCK
+    desc: ["&7An effect that plays where", "&7your victim dies."]
+    items:
+      flame-burst: {"name": "&6Flame Burst", "material": "BLAZE_POWDER", "price": 300, "type": "burst", "particle": ["FLAME"], "count": 50, "spread": 0.4, "speed": 0.08, "sound": "entity.blaze.shoot", "lore": ["&7Burn them to ashes."]}
+      love: {"name": "&dLove Burst", "material": "POPPY", "price": 300, "type": "burst", "particle": ["HEART"], "count": 12, "spread": 0.5, "speed": 0.1, "sound": "entity.villager.yes", "lore": ["&7Spread the love."]}
+      smoke-puff: {"name": "&7Smoke Puff", "material": "GUNPOWDER", "price": 250, "type": "burst", "particle": ["SMOKE_NORMAL|SMOKE"], "count": 40, "spread": 0.4, "speed": 0.05, "sound": "entity.generic.extinguish_fire", "lore": ["&7Vanish in smoke."]}
+      blood: {"name": "&4Blood Splash", "material": "REDSTONE_BLOCK", "price": 500, "type": "burst", "particle": ["BLOCK_CRACK|BLOCK"], "block": "REDSTONE_BLOCK", "count": 60, "spread": 0.4, "speed": 0.1, "sound": "entity.player.hurt", "lore": ["&7Ouch!"]}
+      music: {"name": "&aMusic Notes", "material": "NOTE_BLOCK", "price": 400, "type": "burst", "particle": ["NOTE"], "count": 15, "spread": 0.6, "speed": 1, "sound": "block.note_block.harp", "lore": ["&7Play them a tune."]}
+      ender: {"name": "&5Ender Portal", "material": "ENDER_PEARL", "price": 600, "type": "burst", "particle": ["PORTAL"], "count": 80, "spread": 0.4, "speed": 0.6, "sound": "entity.enderman.teleport", "lore": ["&7Sent to the end."]}
+      totem: {"name": "&eTotem Pop", "material": "TOTEM_OF_UNDYING", "price": 900, "type": "burst", "particle": ["TOTEM|TOTEM_OF_UNDYING"], "count": 50, "spread": 0.3, "speed": 0.4, "sound": "item.totem.use", "lore": ["&7Second chance denied."]}
+      soul: {"name": "&bSoul Escape", "material": "SOUL_SAND", "price": 700, "type": "column", "particle": ["SOUL"], "count": 3, "spread": 0.15, "speed": 0.01, "height": 3, "duration": 30, "sound": "particle.soul_escape.default", "lore": ["&7Their soul rises."]}
+      explosion: {"name": "&cBoom!", "material": "TNT", "price": 1000, "type": "burst", "particle": ["EXPLOSION_LARGE|EXPLOSION"], "count": 3, "spread": 0.5, "speed": 0, "sound": "entity.generic.explode", "lore": ["&7Visual only - no damage."]}
+      magic-helix: {"name": "&dMagic Helix", "material": "ENCHANTED_BOOK", "price": 1200, "type": "helix", "particle": ["ENCHANTMENT_TABLE|ENCHANT"], "radius": 1, "height": 3, "duration": 30, "sound": "block.enchantment_table.use", "lore": ["&7A spiral of magic."]}
+      slime-ring: {"name": "&aSlime Ring", "material": "SLIME_BALL", "price": 800, "type": "ring", "particle": ["VILLAGER_HAPPY|HAPPY_VILLAGER"], "radius": 2.5, "duration": 20, "sound": "entity.slime.squish", "lore": ["&7A wave of green."]}
+      lightning: {"name": "&eLightning Strike", "material": "BLAZE_ROD", "price": 1500, "type": "lightning", "count": 20, "spread": 0.5, "speed": 0.1, "particle": ["CRIT"], "lore": ["&7Zeus is angry."]}
+      fireworks: {"name": "&6Firework", "material": "FIREWORK_ROCKET", "price": 1500, "type": "firework", "shape": "BALL_LARGE", "colors": ["ff0000", "ffaa00", "ffff00"], "lore": ["&7Celebrate every kill."]}
+
+  final:
+    name: "&6&lFinal Kill Effects"
+    title: "&8Final Kill Effects"
+    icon: DIAMOND_SWORD
+    desc: ["&7A bigger effect that plays", "&7on a FINAL kill."]
+    items:
+      thunder-god: {"name": "&e&lThunder God", "material": "BLAZE_ROD", "price": 2500, "type": "lightning", "strikes": 3, "count": 40, "spread": 0.6, "speed": 0.15, "particle": ["FLAME", "CRIT"], "lore": ["&7Three bolts from the sky."]}
+      firework-show: {"name": "&6&lFirework Show", "material": "FIREWORK_ROCKET", "price": 2000, "type": "firework", "shape": "STAR", "colors": ["ff0000", "ffffff", "0000ff"], "lore": ["&7Fireworks for the finish."]}
+      mega-explosion: {"name": "&c&lMega Explosion", "material": "TNT", "price": 3000, "type": "burst", "particle": ["EXPLOSION_HUGE|EXPLOSION_EMITTER", "EXPLOSION_LARGE|EXPLOSION"], "count": 2, "spread": 1, "speed": 0, "sound": "entity.generic.explode", "volume": 2, "lore": ["&7Visual only - no damage."]}
+      dragon-breath: {"name": "&5&lDragon Breath", "material": "DRAGON_BREATH", "price": 3000, "type": "helix", "particle": ["DRAGON_BREATH"], "radius": 1.2, "height": 3.5, "duration": 40, "sound": "entity.ender_dragon.growl", "lore": ["&7Unleash the dragon."]}
+      soul-tower: {"name": "&b&lSoul Tower", "material": "SOUL_LANTERN", "price": 2500, "type": "column", "particle": ["SOUL_FIRE_FLAME"], "count": 6, "spread": 0.2, "speed": 0.02, "height": 5, "duration": 40, "sound": "entity.wither.spawn", "volume": 0.6, "lore": ["&7A tower of souls."]}
+      rainbow-nova: {"name": "&d&lRainbow Nova", "material": "NETHER_STAR", "price": 3500, "type": "ring", "particle": ["REDSTONE|DUST"], "rainbow": true, "size": 1.6, "radius": 4, "duration": 24, "sound": "entity.firework_rocket.twinkle", "lore": ["&7A shockwave of colors."]}
+      blood-rain: {"name": "&4&lBlood Rain", "material": "REDSTONE_BLOCK", "price": 2200, "type": "rain", "particle": ["REDSTONE|DUST"], "colors": ["aa0000", "ff0000"], "size": 1.4, "count": 8, "radius": 2.5, "height": 4, "duration": 40, "sound": "entity.wither.hurt", "lore": ["&7It's raining blood."]}
+      totem-ascend: {"name": "&e&lTotem Ascend", "material": "TOTEM_OF_UNDYING", "price": 2800, "type": "column", "particle": ["TOTEM|TOTEM_OF_UNDYING"], "count": 10, "spread": 0.4, "speed": 0.2, "height": 4, "duration": 30, "sound": "item.totem.use", "lore": ["&7Rise to glory."]}
+      void-hole: {"name": "&8&lVoid Hole", "material": "OBSIDIAN", "price": 3200, "type": "helix", "particle": ["PORTAL"], "radius": 1.5, "height": 3, "duration": 40, "sound": "block.end_portal.spawn", "volume": 0.7, "lore": ["&7Swallowed by the void."]}
+      squid-ink: {"name": "&9&lInk Cloud", "material": "INK_SAC", "price": 1800, "type": "burst", "particle": ["SQUID_INK"], "count": 40, "spread": 0.6, "speed": 0.1, "sound": "entity.squid.squirt", "lore": ["&7Splat!"]}
+      heart-nova: {"name": "&c&lHeart Nova", "material": "RED_DYE", "price": 2000, "type": "ring", "particle": ["HEART"], "radius": 3, "duration": 20, "sound": "entity.player.levelup", "lore": ["&7Love is in the air."]}
+
+  victory:
+    name: "&e&lVictory Effects"
+    title: "&8Victory Effects"
+    icon: GOLD_BLOCK
+    desc: ["&7Plays around you when", "&7your team wins the game."]
+    items:
+      firework-party: {"name": "&6Firework Party", "material": "FIREWORK_ROCKET", "price": 3000, "type": "firework", "interval": 8, "shape": "BALL_LARGE", "colors": ["ff0000", "00ff00", "0000ff", "ffff00", "ff00ff"], "lore": ["&7A sky full of fireworks."]}
+      heart-rain: {"name": "&dHeart Rain", "material": "POPPY", "price": 2000, "type": "rain", "particle": ["HEART"], "count": 2, "radius": 2.5, "height": 3.5, "lore": ["&7Raining hearts."]}
+      rainbow-helix: {"name": "&bRainbow Helix", "material": "NETHER_STAR", "price": 3500, "type": "helix", "particle": ["REDSTONE|DUST"], "rainbow": true, "size": 1.5, "radius": 1.2, "height": 2.6, "lore": ["&7Spin in color."]}
+      flame-tornado: {"name": "&6Flame Tornado", "material": "BLAZE_POWDER", "price": 3000, "type": "helix", "particle": ["FLAME"], "radius": 1.4, "height": 3, "lore": ["&7Surrounded by fire."]}
+      golden-shower: {"name": "&eGolden Shower", "material": "GOLD_INGOT", "price": 2500, "type": "rain", "particle": ["REDSTONE|DUST"], "colors": ["ffd700", "ffaa00"], "size": 1.3, "count": 10, "radius": 2.5, "height": 3.5, "lore": ["&7Gold falls from the sky."]}
+      lightning-party: {"name": "&eLightning Party", "material": "BLAZE_ROD", "price": 4000, "type": "lightning", "interval": 14, "count": 15, "spread": 0.4, "particle": ["CRIT"], "lore": ["&7Thunder for the champion."]}
+      music-party: {"name": "&aMusic Party", "material": "NOTE_BLOCK", "price": 2000, "type": "ring", "particle": ["NOTE"], "radius": 2.5, "interval": 2, "lore": ["&7Dance, dance!"]}
+      totem-celebration: {"name": "&eTotem Celebration", "material": "TOTEM_OF_UNDYING", "price": 3200, "type": "column", "particle": ["TOTEM|TOTEM_OF_UNDYING"], "count": 6, "spread": 0.5, "speed": 0.15, "height": 3, "lore": ["&7Immortal winners."]}
+      ender-dance: {"name": "&5Ender Dance", "material": "ENDER_EYE", "price": 2800, "type": "helix", "particle": ["PORTAL"], "radius": 1.3, "height": 3, "lore": ["&7Dancing with the end."]}
+      snow-fall: {"name": "&fSnowfall", "material": "SNOWBALL", "price": 1500, "type": "rain", "particle": ["SNOWBALL|ITEM_SNOWBALL"], "count": 6, "radius": 3, "height": 4, "lore": ["&7A winter celebration."]}
+
+  death:
+    name: "&8&lDeath Effects"
+    title: "&8Death Effects"
+    icon: SKELETON_SKULL
+    desc: ["&7Plays where YOU die."]
+    items:
+      ghost: {"name": "&fGhost", "material": "BONE", "price": 400, "type": "column", "particle": ["SOUL"], "count": 3, "spread": 0.15, "speed": 0.01, "height": 3, "duration": 25, "sound": "entity.ghast.ambient", "volume": 0.6, "lore": ["&7Your soul leaves the body."]}
+      poof: {"name": "&7Poof", "material": "FEATHER", "price": 250, "type": "burst", "particle": ["CLOUD"], "count": 40, "spread": 0.4, "speed": 0.08, "sound": "entity.generic.extinguish_fire", "lore": ["&7Disappear in a cloud."]}
+      angry: {"name": "&cAngry Villager", "material": "IRON_AXE", "price": 400, "type": "burst", "particle": ["VILLAGER_ANGRY|ANGRY_VILLAGER"], "count": 8, "spread": 0.6, "speed": 0, "sound": "entity.villager.no", "lore": ["&7Rage quit."]}
+      bleed: {"name": "&4Bleed Out", "material": "REDSTONE", "price": 500, "type": "burst", "particle": ["BLOCK_CRACK|BLOCK"], "block": "REDSTONE_BLOCK", "count": 50, "spread": 0.4, "speed": 0.1, "lore": ["&7Not your day."]}
+      bubbles: {"name": "&bBubble Pop", "material": "WATER_BUCKET", "price": 450, "type": "burst", "particle": ["BUBBLE_POP", "WATER_BUBBLE|BUBBLE"], "count": 30, "spread": 0.5, "speed": 0.05, "sound": "entity.generic.splash", "lore": ["&7Pop!"]}
+      void-collapse: {"name": "&5Void Collapse", "material": "ENDER_PEARL", "price": 900, "type": "ring", "particle": ["PORTAL"], "radius": 2, "duration": 16, "sound": "entity.enderman.teleport", "lore": ["&7Collapse into the void."]}
+      fire-death: {"name": "&6Burn", "material": "MAGMA_CREAM", "price": 700, "type": "burst", "particle": ["LAVA", "FLAME"], "count": 30, "spread": 0.4, "speed": 0.05, "sound": "entity.blaze.death", "lore": ["&7Went out in flames."]}
+      last-firework: {"name": "&eLast Firework", "material": "FIREWORK_ROCKET", "price": 1200, "type": "firework", "shape": "BURST", "colors": ["ffffff", "aaaaaa"], "lore": ["&7A final goodbye."]}
+
+  trail:
+    name: "&b&lTrails"
+    title: "&8Trails"
+    icon: LEATHER_BOOTS
+    desc: ["&7Particles that follow you", "&7while you move in a game."]
+    items:
+      flame: {"name": "&6Flame Trail", "material": "BLAZE_POWDER", "price": 600, "type": "trail", "particle": ["FLAME"], "count": 3, "spread": 0.15, "speed": 0.01}
+      hearts: {"name": "&dHeart Trail", "material": "POPPY", "price": 600, "type": "trail", "particle": ["HEART"], "count": 1, "spread": 0.3, "speed": 0}
+      notes: {"name": "&aMusic Trail", "material": "NOTE_BLOCK", "price": 600, "type": "trail", "particle": ["NOTE"], "count": 1, "spread": 0.3, "speed": 1}
+      rainbow: {"name": "&bRainbow Trail", "material": "NETHER_STAR", "price": 1500, "type": "trail", "particle": ["REDSTONE|DUST"], "rainbow": true, "size": 1.3, "count": 4, "spread": 0.2, "speed": 0}
+      cloud: {"name": "&fCloud Trail", "material": "FEATHER", "price": 400, "type": "trail", "particle": ["CLOUD"], "count": 2, "spread": 0.15, "speed": 0.01}
+      magic: {"name": "&dMagic Trail", "material": "ENCHANTED_BOOK", "price": 800, "type": "trail", "particle": ["ENCHANTMENT_TABLE|ENCHANT"], "count": 6, "spread": 0.3, "speed": 0.5}
+      soul: {"name": "&3Soul Trail", "material": "SOUL_SAND", "price": 900, "type": "trail", "particle": ["SOUL"], "count": 2, "spread": 0.2, "speed": 0.01}
+      happy: {"name": "&aHappy Trail", "material": "SLIME_BALL", "price": 500, "type": "trail", "particle": ["VILLAGER_HAPPY|HAPPY_VILLAGER"], "count": 3, "spread": 0.3, "speed": 0}
+      lava: {"name": "&cLava Trail", "material": "LAVA_BUCKET", "price": 900, "type": "trail", "particle": ["DRIP_LAVA|DRIPPING_LAVA"], "count": 3, "spread": 0.25, "speed": 0}
+      end-rod: {"name": "&fEnd Rod Trail", "material": "END_ROD", "price": 1200, "type": "trail", "particle": ["END_ROD"], "count": 2, "spread": 0.2, "speed": 0.02}
+      crit: {"name": "&eCritical Trail", "material": "IRON_SWORD", "price": 700, "type": "trail", "particle": ["CRIT_MAGIC|ENCHANTED_HIT"], "count": 4, "spread": 0.3, "speed": 0.1}
+      portal: {"name": "&5Portal Trail", "material": "OBSIDIAN", "price": 1000, "type": "trail", "particle": ["PORTAL"], "count": 8, "spread": 0.3, "speed": 0.3}
+
+  projectile:
+    name: "&a&lProjectile Effects"
+    title: "&8Projectile Effects"
+    icon: ARROW
+    desc: ["&7Particles on your arrows,", "&7snowballs, eggs and pearls."]
+    items:
+      flame: {"name": "&6Flame Shot", "material": "BLAZE_POWDER", "price": 500, "type": "trail", "particle": ["FLAME"], "count": 2, "spread": 0.05, "speed": 0.01}
+      hearts: {"name": "&dLove Shot", "material": "POPPY", "price": 500, "type": "trail", "particle": ["HEART"], "count": 1, "spread": 0.1, "speed": 0}
+      notes: {"name": "&aMusic Shot", "material": "NOTE_BLOCK", "price": 500, "type": "trail", "particle": ["NOTE"], "count": 1, "spread": 0.1, "speed": 1}
+      rainbow: {"name": "&bRainbow Shot", "material": "NETHER_STAR", "price": 1300, "type": "trail", "particle": ["REDSTONE|DUST"], "rainbow": true, "size": 1.2, "count": 3, "spread": 0.05, "speed": 0}
+      cloud: {"name": "&fCloud Shot", "material": "FEATHER", "price": 350, "type": "trail", "particle": ["CLOUD"], "count": 1, "spread": 0.05, "speed": 0.01}
+      soul: {"name": "&3Soul Shot", "material": "SOUL_SAND", "price": 800, "type": "trail", "particle": ["SOUL_FIRE_FLAME"], "count": 2, "spread": 0.05, "speed": 0.01}
+      magic: {"name": "&dMagic Shot", "material": "ENCHANTED_BOOK", "price": 700, "type": "trail", "particle": ["ENCHANTMENT_TABLE|ENCHANT"], "count": 5, "spread": 0.15, "speed": 0.4}
+      end-rod: {"name": "&fStar Shot", "material": "END_ROD", "price": 1000, "type": "trail", "particle": ["END_ROD"], "count": 1, "spread": 0.05, "speed": 0.01}
+      crit: {"name": "&eCritical Shot", "material": "IRON_SWORD", "price": 600, "type": "trail", "particle": ["CRIT"], "count": 3, "spread": 0.1, "speed": 0.05}
+      happy: {"name": "&aSlime Shot", "material": "SLIME_BALL", "price": 400, "type": "trail", "particle": ["VILLAGER_HAPPY|HAPPY_VILLAGER"], "count": 2, "spread": 0.1, "speed": 0}
+
+  bed:
+    name: "&c&lBed Designs"
+    title: "&8Bed Designs"
+    icon: RED_BED
+    desc: ["&7A floating decoration + aura", "&7on YOUR team's bed."]
+    items:
+      magic-bed: {"name": "&dMagic Bed", "material": "ENCHANTED_BOOK", "price": 1500, "type": "aura", "decor": "ENCHANTED_BOOK", "particle": ["ENCHANTMENT_TABLE|ENCHANT"], "count": 8, "spread": 0.5, "speed": 0.4}
+      flame-crown: {"name": "&6Flame Crown", "material": "BLAZE_ROD", "price": 1800, "type": "aura", "decor": "BLAZE_ROD", "particle": ["FLAME"], "count": 4, "spread": 0.3, "speed": 0.02}
+      heart-bed: {"name": "&dHeart Bed", "material": "POPPY", "price": 1400, "type": "aura", "decor": "RED_DYE", "particle": ["HEART"], "count": 2, "spread": 0.5, "speed": 0}
+      diamond-bed: {"name": "&bDiamond Bed", "material": "DIAMOND_BLOCK", "price": 2500, "type": "aura", "decor": "DIAMOND_BLOCK", "particle": ["VILLAGER_HAPPY|HAPPY_VILLAGER"], "count": 4, "spread": 0.5, "speed": 0}
+      emerald-throne: {"name": "&aEmerald Throne", "material": "EMERALD_BLOCK", "price": 2500, "type": "aura", "decor": "EMERALD_BLOCK", "particle": ["VILLAGER_HAPPY|HAPPY_VILLAGER"], "count": 4, "spread": 0.5, "speed": 0}
+      golden-crown: {"name": "&eGolden Crown", "material": "GOLDEN_HELMET", "price": 2200, "type": "aura", "decor": "GOLDEN_HELMET", "particle": ["CRIT_MAGIC|ENCHANTED_HIT"], "count": 5, "spread": 0.4, "speed": 0.1}
+      ender-altar: {"name": "&5Ender Altar", "material": "DRAGON_HEAD", "price": 3000, "type": "aura", "decor": "DRAGON_HEAD", "particle": ["PORTAL"], "count": 10, "spread": 0.5, "speed": 0.4}
+      skull-guard: {"name": "&8Skull Guard", "material": "WITHER_SKELETON_SKULL", "price": 2600, "type": "aura", "decor": "WITHER_SKELETON_SKULL", "particle": ["SMOKE_LARGE|LARGE_SMOKE"], "count": 2, "spread": 0.3, "speed": 0.01}
+      pumpkin-patch: {"name": "&6Pumpkin Patch", "material": "JACK_O_LANTERN", "price": 1600, "type": "aura", "decor": "JACK_O_LANTERN", "particle": ["FLAME"], "count": 2, "spread": 0.4, "speed": 0.01}
+      rainbow-beacon: {"name": "&bRainbow Beacon", "material": "BEACON", "price": 3500, "type": "aura", "decor": "BEACON", "particle": ["REDSTONE|DUST"], "rainbow": true, "size": 1.4, "count": 6, "spread": 0.6}
+
+  npc:
+    name: "&e&lShop NPCs"
+    title: "&8Shop NPC Skins"
+    icon: VILLAGER_SPAWN_EGG
+    desc: ["&7Changes how your team's", "&7Item Shop and Upgrades", "&7NPCs look."]
+    items:
+      librarian: {"name": "&fLibrarian", "material": "LECTERN", "price": 500, "type": "npc", "entity": "VILLAGER", "profession": "LIBRARIAN"}
+      armorer: {"name": "&7Armorer", "material": "BLAST_FURNACE", "price": 500, "type": "npc", "entity": "VILLAGER", "profession": "ARMORER"}
+      butcher: {"name": "&cButcher", "material": "SMOKER", "price": 500, "type": "npc", "entity": "VILLAGER", "profession": "BUTCHER"}
+      cleric: {"name": "&5Cleric", "material": "BREWING_STAND", "price": 600, "type": "npc", "entity": "VILLAGER", "profession": "CLERIC"}
+      farmer: {"name": "&aFarmer", "material": "COMPOSTER", "price": 500, "type": "npc", "entity": "VILLAGER", "profession": "FARMER"}
+      weaponsmith: {"name": "&8Weaponsmith", "material": "GRINDSTONE", "price": 600, "type": "npc", "entity": "VILLAGER", "profession": "WEAPONSMITH"}
+      nitwit: {"name": "&2Nitwit", "material": "EMERALD", "price": 400, "type": "npc", "entity": "VILLAGER", "profession": "NITWIT"}
+      snow-villager: {"name": "&bSnow Villager", "material": "SNOW_BLOCK", "price": 700, "type": "npc", "entity": "VILLAGER", "profession": "LIBRARIAN", "villager-type": "SNOW"}
+      desert-villager: {"name": "&eDesert Villager", "material": "SAND", "price": 700, "type": "npc", "entity": "VILLAGER", "profession": "FARMER", "villager-type": "DESERT"}
+      swamp-villager: {"name": "&2Swamp Villager", "material": "LILY_PAD", "price": 700, "type": "npc", "entity": "VILLAGER", "profession": "CLERIC", "villager-type": "SWAMP"}
+      wandering-trader: {"name": "&9Wandering Trader", "material": "WANDERING_TRADER_SPAWN_EGG", "price": 1200, "type": "npc", "entity": "WANDERING_TRADER"}
+      witch: {"name": "&5Witch", "material": "WITCH_SPAWN_EGG", "price": 1500, "type": "npc", "entity": "WITCH"}
+      iron-golem: {"name": "&fIron Golem", "material": "IRON_BLOCK", "price": 2000, "type": "npc", "entity": "IRON_GOLEM"}
+      snow-golem: {"name": "&fSnow Golem", "material": "CARVED_PUMPKIN", "price": 1800, "type": "npc", "entity": "SNOWMAN"}
+      pillager: {"name": "&8Pillager", "material": "PILLAGER_SPAWN_EGG", "price": 2200, "type": "npc", "entity": "PILLAGER"}
+      evoker: {"name": "&6Evoker", "material": "EVOKER_SPAWN_EGG", "price": 2500, "type": "npc", "entity": "EVOKER"}
